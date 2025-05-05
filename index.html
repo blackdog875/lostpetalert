@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetAlert - Find Your Lost Pet</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #FF9800;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --danger-color: #f44336;
+            --success-color: #8bc34a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-container svg {
+            height: 110px;
+            width: 60px;
+            margin-right: 1rem;
+        }
+        
+        .logo-container img {
+            height: 100px;
+            width: auto;
+            margin-right: 1rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .hero {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/800/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            padding: 3rem 2rem;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            flex: 1 1 300px;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .feature-icon {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .feature-content {
+            padding: 1.5rem;
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .how-it-works {
+            padding: 3rem 2rem;
+            background-color: var(--light-color);
+        }
+        
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .step-card {
+            flex: 1 1 250px;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        
+        .step-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .testimonials {
+            padding: 3rem 2rem;
+            background-color: white;
+        }
+        
+        .testimonial-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            flex: 1 1 350px;
+            padding: 2rem;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--dark-color);
+        }
+        
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .cta {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1 1 300px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.7rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="PetAlert Logo" width="100" height="100">
+
+            <!-- <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="30" r="25" fill="#4CAF50" />
+                <path d="M20,20 C20,20 25,15 30,15 C35,15 40,20 40,20" stroke="#FF9800" stroke-width="3" fill="none" stroke-linecap="round" />
+                <circle cx="23" cy="25" r="3" fill="#FF9800" />
+                <circle cx="37" cy="25" r="3" fill="#FF9800" />
+                <path d="M25,35 C25,35 27,40 30,40 C33,40 35,35 35,35" stroke="#FF9800" stroke-width="2" fill="none" stroke-linecap="round" />
+                <path d="M15,15 L10,10 M45,15 L50,10" stroke="#f4f4f4" stroke-width="2" stroke-linecap="round" />
+                <text x="30" y="48" text-anchor="middle" fill="#f4f4f4" font-family="Arial" font-size="8" font-weight="bold">PETALERT</text>
+            </svg>
+            <h1>PetAlert</h1> -->
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Report Lost</a></li>
+                <li><a href="#">Found Pets</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>Help Find Your Lost Pet</h1>
+        <p>PetAlert connects pet owners with a community of helpful neighbors to quickly find lost pets. Our platform has helped reunite thousands of pets with their families.</p>
+        <a href="#" class="btn btn-secondary">Report a Lost Pet</a>
+        <a href="#" class="btn btn-primary">I Found a Pet</a>
+    </section>
+    
+    <section class="features">
+        <h2 class="section-title">Why Choose PetAlert</h2>
+        <div class="feature-container">
+            <div class="feature-card">
+                <div class="feature-icon">&#128506;</div>
+                <div class="feature-content">
+                    <h3>Localized Alerts</h3>
+                    <p>Send immediate notifications to community members in your area to maximize the chances of finding your pet quickly.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128241;</div>
+                <div class="feature-content">
+                    <h3>Mobile App</h3>
+                    <p>Receive real-time alerts and updates on your mobile device. Post sightings and communicate with pet owners instantly.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128101;</div>
+                <div class="feature-content">
+                    <h3>Community Support</h3>
+                    <p>Connect with a network of animal lovers dedicated to helping reunite pets with their families.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Register</h3>
+                <p>Create an account with your contact information and neighborhood details.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Report</h3>
+                <p>Report a lost or found pet with photos, description, and last known location.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Alert</h3>
+                <p>We alert nearby users who can help look for or identify your pet.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Reunite</h3>
+                <p>Connect with the finder and reunite with your beloved pet!</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <h2 class="section-title">Success Stories</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card">
+                <p class="testimonial-content">"PetAlert was a lifesaver when my dog Max went missing. Within hours, a neighbor spotted him and contacted me through the app. I couldn't be more grateful!"</p>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/50/50" alt="Sarah J.">
+                    <div class="author-info">
+                        <h4>Sarah J.</h4>
+                        <p>Dog owner, Portland</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-content">"I found a cat wandering in my yard and wasn't sure what to do. I posted on PetAlert and within an hour I was connected with the worried owner who lived just a few blocks away."</p>
+                <div class="testimonial-author">
+                    <img src="/api/placeholder/50/50" alt="Michael T.">
+                    <div class="author-info">
+                        <h4>Michael T.</h4>
+                        <p>Community Member, Seattle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <h2>Ready to Find Your Lost Pet?</h2>
+        <p>Join thousands of pet owners who have successfully reunited with their beloved companions through PetAlert.</p>
+        <a href="#" class="btn btn-secondary">Sign Up Now - It's Free!</a>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PetAlert</h3>
+                <p>Helping reunite pets and owners through community support and quick action.</p>
+                <div class="social-links">
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M22 5.16c-.94.42-1.94.7-3 .82 1.07-.64 1.9-1.66 2.3-2.88-1.03.61-2.17 1.06-3.38 1.3C16.95 3.2 15.8 2.6 14.5 2.6c-2.5 0-4.5 2.04-4.5 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z"/></svg></a>
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.247-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.218-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.987.01-4.04.059-.977.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.88-.344 1.857-.047 1.053-.059 1.37-.059 4.04 0 2.67.01 2.988.059 4.04.045.977.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.88.3 1.857.344 1.054.047 1.37.059 4.04.059 2.67 0 2.987-.01 4.04-.059.977-.045 1.504-.207 1.857-.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.88.344-1.857.047-1.054.059-1.37.059-4.04 0-2.67-.01-2.987-.059-4.04-.045-.977-.207-1.504-.344-1.857a3.09 3.09 0 0 0-.748-1.15 3.09 3.09 0 0 0-1.15-.748c-.353-.137-.88-.3-1.857-.344-1.054-.047-1.37-.059-4.04-.059zm0 3.064A5.135 5.135 0 0 1 17.135 12 5.135 5.135 0 0 1 12 17.135 5.135 5.135 0 0 1 6.865 12 5.135 5.135 0 0 1 12 6.865zm0 1.802a3.333 3.333 0 1 0 0 6.666 3.333 3.333 0 0 0 0-6.666zm6.532-3.173a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Report Lost</a></li>
+                    <li><a href="#">Found Pets</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: info@lostpetalert.github.io</li>
+                    <li>Phone: (800) 400-1611</li>
+                    <li>Address: 1611 Melrose Dr. A#6, Vista CA 92081</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 PetAlert. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
